@@ -114,26 +114,26 @@ body{
 /* ---------- Table of contents ---------- */
 nav.toc{
   position:sticky;top:calc(var(--header-h) + 16px);
-  align-self:start;max-height:calc(100vh - var(--header-h) - 32px);
-  overflow-y:auto;padding:18px 4px 40px 0;
-  font-size:.86rem;
+  align-self:start;overflow:visible;
+  padding:18px 4px 12px 0;
+  font-size:clamp(.62rem,1.05vh,.86rem);
 }
 nav.toc h2{
   font-family:var(--font-display);text-transform:uppercase;letter-spacing:.12em;
-  font-size:.68rem;color:var(--ink-soft);margin:0 0 12px;
+  font-size:clamp(.52rem,.85vh,.68rem);color:var(--ink-soft);margin:0 0 clamp(4px,1vh,12px);
 }
 nav.toc ol{list-style:none;margin:0;padding:0;counter-reset:toc;}
-nav.toc li{counter-increment:toc;margin:1px 0;}
+nav.toc li{counter-increment:toc;margin:0;}
 nav.toc a{
-  display:flex;gap:10px;align-items:baseline;
+  display:flex;gap:8px;align-items:baseline;
   text-decoration:none;color:var(--ink-soft);
-  padding:6px 10px;border-radius:8px;border-left:3px solid transparent;
-  line-height:1.3;
+  padding:clamp(2px,.55vh,6px) 10px;border-radius:8px;border-left:3px solid transparent;
+  line-height:1.2;
 }
 nav.toc a::before{
   content:counter(toc,decimal-leading-zero);
-  font-family:var(--font-display);font-size:.66rem;font-weight:700;
-  color:var(--mustard-deep);flex:none;min-width:20px;
+  font-family:var(--font-display);font-size:clamp(.5rem,.8vh,.66rem);font-weight:700;
+  color:var(--mustard-deep);flex:none;min-width:18px;
 }
 nav.toc a:hover{background:var(--surface);color:var(--ink);}
 nav.toc a.active{
@@ -147,8 +147,14 @@ nav.toc a.active{
     position:fixed;inset:var(--header-h) 0 0 auto;width:min(320px,86vw);
     background:var(--surface);border-left:1px solid var(--line);
     box-shadow:var(--shadow);padding:22px 16px 60px;z-index:130;
-    transform:translateX(105%);transition:transform .26s ease;max-height:none;
+    transform:translateX(105%);transition:transform .26s ease;
+    max-height:none;overflow-y:auto;
+    font-size:.86rem;
   }
+  nav.toc h2{font-size:.68rem;margin:0 0 12px;}
+  nav.toc li{margin:1px 0;}
+  nav.toc a{padding:6px 10px;line-height:1.3;gap:10px;}
+  nav.toc a::before{font-size:.66rem;min-width:20px;}
   nav.toc.open{transform:translateX(0);}
 }
 
@@ -424,6 +430,18 @@ tbody th{font-weight:700;color:var(--teal-deep);background:var(--teal-tint);}
 .glossary dt{font-family:var(--font-display);font-weight:700;color:var(--teal-deep);
   margin-top:14px;font-size:.92rem;}
 .glossary dd{margin:2px 0 0;color:var(--ink-soft);font-size:.92rem;}
+
+/* glossary — two-column table layout */
+.glossary-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:20px 0;}
+@media(max-width:560px){.glossary-grid{grid-template-columns:1fr;}}
+.glossary-grid .table-wrap{margin:0;}
+.glossary-grid table{min-width:0;font-size:.86rem;table-layout:fixed;}
+.glossary-grid tbody th{width:36%;font-size:.84rem;}
+.glossary-grid td{color:var(--ink-soft);}
+.visually-hidden{
+  position:absolute;width:1px;height:1px;margin:-1px;padding:0;
+  overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;
+}
 
 /* details / progressive disclosure */
 details{border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--surface);
@@ -1064,29 +1082,45 @@ footer .small{color:#a89c84;}
       <h2>Key terminology glossary</h2>
       <p class="lead">A quick-reference list of the terms you'll hear most often. Keep it handy for your first few months.</p>
 
-      <dl class="glossary">
-        <dt>Approaches to Learning (ATL)</dt><dd>The five skill categories (communication, social, self-management, research, thinking) that help students "learn how to learn."</dd>
-        <dt>Best-fit</dt><dd>Judging work against the descriptor it matches <em>overall</em>, rather than checking off every word.</dd>
-        <dt>Command terms</dt><dd>Defined instruction words (analyse, evaluate, justify…) that specify what a task requires.</dd>
-        <dt>Community Project</dt><dd>A student-directed, service-focused project, usually in Years 3 or 4, often done in groups.</dd>
-        <dt>Conceptual understanding</dt><dd>Grasp of a transferable big idea that can move across topics and subjects.</dd>
-        <dt>Criterion-related assessment</dt><dd>Judging work against published standards, not against other students.</dd>
-        <dt>eAssessment</dt><dd>The IB's optional external assessment (on-screen exams + ePortfolios) leading to an IB-validated MYP Certificate.</dd>
-        <dt>Global context</dt><dd>One of six real-world settings that give a unit relevance and purpose.</dd>
-        <dt>Interdisciplinary learning</dt><dd>Integrating two+ subject groups to build new, combined understanding (≥1 unit per year).</dd>
-        <dt>International-mindedness</dt><dd>The disposition to understand and respect other cultures and perspectives.</dd>
-        <dt>Key concept</dt><dd>One of 16 broad, interdisciplinary big ideas shared across the programme.</dd>
-        <dt>Learner Profile</dt><dd>The IB's ten attributes describing the kind of learner all programmes aim to develop.</dd>
-        <dt>Moderation</dt><dd>The IB's check of sampled work to keep grades comparable across schools.</dd>
-        <dt>MYP coordinator</dt><dd>The person who leads MYP implementation and is your go-to for guidance.</dd>
-        <dt>Personal Project</dt><dd>The required, independent, self-directed culminating project in the final year (MYP 5).</dd>
-        <dt>Related concept</dt><dd>A subject-specific concept that deepens a key concept within one discipline.</dd>
-        <dt>Service as Action</dt><dd>The MYP's approach to meaningful action and service arising from learning.</dd>
-        <dt>Standardization</dt><dd>Teachers aligning their judgements within a school so marking is consistent.</dd>
-        <dt>Statement of inquiry</dt><dd>The single sentence that expresses a unit's core transferable understanding (concept + context).</dd>
-        <dt>Subject groups</dt><dd>The eight required areas of MYP study.</dd>
-        <dt>Unit planner</dt><dd>The shared document that captures the design of an MYP unit.</dd>
-      </dl>
+      <div class="glossary-grid">
+        <div class="table-wrap">
+          <table>
+            <caption class="visually-hidden">Glossary terms, A to K</caption>
+            <thead><tr><th>Term</th><th>Definition</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Approaches to Learning (ATL)</th><td>The five skill categories (communication, social, self-management, research, thinking) that help students "learn how to learn."</td></tr>
+              <tr><th scope="row">Best-fit</th><td>Judging work against the descriptor it matches <em>overall</em>, rather than checking off every word.</td></tr>
+              <tr><th scope="row">Command terms</th><td>Defined instruction words (analyse, evaluate, justify&hellip;) that specify what a task requires.</td></tr>
+              <tr><th scope="row">Community Project</th><td>A student-directed, service-focused project, usually in Years 3 or 4, often done in groups.</td></tr>
+              <tr><th scope="row">Conceptual understanding</th><td>Grasp of a transferable big idea that can move across topics and subjects.</td></tr>
+              <tr><th scope="row">Criterion-related assessment</th><td>Judging work against published standards, not against other students.</td></tr>
+              <tr><th scope="row">eAssessment</th><td>The IB's optional external assessment (on-screen exams + ePortfolios) leading to an IB-validated MYP Certificate.</td></tr>
+              <tr><th scope="row">Global context</th><td>One of six real-world settings that give a unit relevance and purpose.</td></tr>
+              <tr><th scope="row">Interdisciplinary learning</th><td>Integrating two+ subject groups to build new, combined understanding (&ge;1 unit per year).</td></tr>
+              <tr><th scope="row">International-mindedness</th><td>The disposition to understand and respect other cultures and perspectives.</td></tr>
+              <tr><th scope="row">Key concept</th><td>One of 16 broad, interdisciplinary big ideas shared across the programme.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <caption class="visually-hidden">Glossary terms, L to U</caption>
+            <thead><tr><th>Term</th><th>Definition</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Learner Profile</th><td>The IB's ten attributes describing the kind of learner all programmes aim to develop.</td></tr>
+              <tr><th scope="row">Moderation</th><td>The IB's check of sampled work to keep grades comparable across schools.</td></tr>
+              <tr><th scope="row">MYP coordinator</th><td>The person who leads MYP implementation and is your go-to for guidance.</td></tr>
+              <tr><th scope="row">Personal Project</th><td>The required, independent, self-directed culminating project in the final year (MYP 5).</td></tr>
+              <tr><th scope="row">Related concept</th><td>A subject-specific concept that deepens a key concept within one discipline.</td></tr>
+              <tr><th scope="row">Service as Action</th><td>The MYP's approach to meaningful action and service arising from learning.</td></tr>
+              <tr><th scope="row">Standardization</th><td>Teachers aligning their judgements within a school so marking is consistent.</td></tr>
+              <tr><th scope="row">Statement of inquiry</th><td>The single sentence that expresses a unit's core transferable understanding (concept + context).</td></tr>
+              <tr><th scope="row">Subject groups</th><td>The eight required areas of MYP study.</td></tr>
+              <tr><th scope="row">Unit planner</th><td>The shared document that captures the design of an MYP unit.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </section>
 
     <!-- 19 -->
