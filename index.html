@@ -116,23 +116,30 @@ nav.toc{
   position:sticky;top:calc(var(--header-h) + 16px);
   align-self:start;overflow:visible;
   padding:18px 4px 12px 0;
-  font-size:clamp(.62rem,1.05vh,.86rem);
+  --toc-font:.86rem;
+  --toc-h2-font:.68rem;
+  --toc-h2-margin:12px;
+  --toc-pad-v:6px;
+  --toc-pad-h:10px;
+  --toc-line-height:1.3;
+  --toc-num-font:.66rem;
+  font-size:var(--toc-font);
 }
 nav.toc h2{
   font-family:var(--font-display);text-transform:uppercase;letter-spacing:.12em;
-  font-size:clamp(.52rem,.85vh,.68rem);color:var(--ink-soft);margin:0 0 clamp(4px,1vh,12px);
+  font-size:var(--toc-h2-font);color:var(--ink-soft);margin:0 0 var(--toc-h2-margin);
 }
 nav.toc ol{list-style:none;margin:0;padding:0;counter-reset:toc;}
 nav.toc li{counter-increment:toc;margin:0;}
 nav.toc a{
   display:flex;gap:8px;align-items:baseline;
   text-decoration:none;color:var(--ink-soft);
-  padding:clamp(2px,.55vh,6px) 10px;border-radius:8px;border-left:3px solid transparent;
-  line-height:1.2;
+  padding:var(--toc-pad-v) var(--toc-pad-h);border-radius:8px;border-left:3px solid transparent;
+  line-height:var(--toc-line-height);
 }
 nav.toc a::before{
   content:counter(toc,decimal-leading-zero);
-  font-family:var(--font-display);font-size:clamp(.5rem,.8vh,.66rem);font-weight:700;
+  font-family:var(--font-display);font-size:var(--toc-num-font);font-weight:700;
   color:var(--mustard-deep);flex:none;min-width:18px;
 }
 nav.toc a:hover{background:var(--surface);color:var(--ink);}
@@ -149,12 +156,15 @@ nav.toc a.active{
     box-shadow:var(--shadow);padding:22px 16px 60px;z-index:130;
     transform:translateX(105%);transition:transform .26s ease;
     max-height:none;overflow-y:auto;
-    font-size:.86rem;
+    --toc-font:.86rem;
+    --toc-h2-font:.68rem;
+    --toc-h2-margin:12px;
+    --toc-pad-v:6px;
+    --toc-pad-h:10px;
+    --toc-line-height:1.3;
+    --toc-num-font:.66rem;
   }
-  nav.toc h2{font-size:.68rem;margin:0 0 12px;}
   nav.toc li{margin:1px 0;}
-  nav.toc a{padding:6px 10px;line-height:1.3;gap:10px;}
-  nav.toc a::before{font-size:.66rem;min-width:20px;}
   nav.toc.open{transform:translateX(0);}
 }
 
@@ -431,13 +441,16 @@ tbody th{font-weight:700;color:var(--teal-deep);background:var(--teal-tint);}
   margin-top:14px;font-size:.92rem;}
 .glossary dd{margin:2px 0 0;color:var(--ink-soft);font-size:.92rem;}
 
-/* glossary — two-column table layout */
-.glossary-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:20px 0;}
-@media(max-width:560px){.glossary-grid{grid-template-columns:1fr;}}
-.glossary-grid .table-wrap{margin:0;}
-.glossary-grid table{min-width:0;font-size:.86rem;table-layout:fixed;}
-.glossary-grid tbody th{width:36%;font-size:.84rem;}
-.glossary-grid td{color:var(--ink-soft);}
+/* glossary — single-column table, simple two-cell row style */
+.glossary-table{table-layout:fixed;}
+.glossary-table th,.glossary-table td{padding:9px 14px;}
+.glossary-table td.term{font-weight:700;color:var(--teal-deep);background:var(--teal-tint);}
+.glossary-table td.def{color:var(--ink-soft);}
+@media(max-width:560px){
+  .glossary-table{table-layout:auto;}
+  .glossary-table td.term{white-space:normal;}
+  .glossary-table col:first-child{width:auto !important;}
+}
 .visually-hidden{
   position:absolute;width:1px;height:1px;margin:-1px;padding:0;
   overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;
@@ -1082,44 +1095,38 @@ footer .small{color:#a89c84;}
       <h2>Key terminology glossary</h2>
       <p class="lead">A quick-reference list of the terms you'll hear most often. Keep it handy for your first few months.</p>
 
-      <div class="glossary-grid">
-        <div class="table-wrap">
-          <table>
-            <caption class="visually-hidden">Glossary terms, A to K</caption>
-            <thead><tr><th>Term</th><th>Definition</th></tr></thead>
-            <tbody>
-              <tr><th scope="row">Approaches to Learning (ATL)</th><td>The five skill categories (communication, social, self-management, research, thinking) that help students "learn how to learn."</td></tr>
-              <tr><th scope="row">Best-fit</th><td>Judging work against the descriptor it matches <em>overall</em>, rather than checking off every word.</td></tr>
-              <tr><th scope="row">Command terms</th><td>Defined instruction words (analyse, evaluate, justify&hellip;) that specify what a task requires.</td></tr>
-              <tr><th scope="row">Community Project</th><td>A student-directed, service-focused project, usually in Years 3 or 4, often done in groups.</td></tr>
-              <tr><th scope="row">Conceptual understanding</th><td>Grasp of a transferable big idea that can move across topics and subjects.</td></tr>
-              <tr><th scope="row">Criterion-related assessment</th><td>Judging work against published standards, not against other students.</td></tr>
-              <tr><th scope="row">eAssessment</th><td>The IB's optional external assessment (on-screen exams + ePortfolios) leading to an IB-validated MYP Certificate.</td></tr>
-              <tr><th scope="row">Global context</th><td>One of six real-world settings that give a unit relevance and purpose.</td></tr>
-              <tr><th scope="row">Interdisciplinary learning</th><td>Integrating two+ subject groups to build new, combined understanding (&ge;1 unit per year).</td></tr>
-              <tr><th scope="row">International-mindedness</th><td>The disposition to understand and respect other cultures and perspectives.</td></tr>
-              <tr><th scope="row">Key concept</th><td>One of 16 broad, interdisciplinary big ideas shared across the programme.</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="table-wrap">
-          <table>
-            <caption class="visually-hidden">Glossary terms, L to U</caption>
-            <thead><tr><th>Term</th><th>Definition</th></tr></thead>
-            <tbody>
-              <tr><th scope="row">Learner Profile</th><td>The IB's ten attributes describing the kind of learner all programmes aim to develop.</td></tr>
-              <tr><th scope="row">Moderation</th><td>The IB's check of sampled work to keep grades comparable across schools.</td></tr>
-              <tr><th scope="row">MYP coordinator</th><td>The person who leads MYP implementation and is your go-to for guidance.</td></tr>
-              <tr><th scope="row">Personal Project</th><td>The required, independent, self-directed culminating project in the final year (MYP 5).</td></tr>
-              <tr><th scope="row">Related concept</th><td>A subject-specific concept that deepens a key concept within one discipline.</td></tr>
-              <tr><th scope="row">Service as Action</th><td>The MYP's approach to meaningful action and service arising from learning.</td></tr>
-              <tr><th scope="row">Standardization</th><td>Teachers aligning their judgements within a school so marking is consistent.</td></tr>
-              <tr><th scope="row">Statement of inquiry</th><td>The single sentence that expresses a unit's core transferable understanding (concept + context).</td></tr>
-              <tr><th scope="row">Subject groups</th><td>The eight required areas of MYP study.</td></tr>
-              <tr><th scope="row">Unit planner</th><td>The shared document that captures the design of an MYP unit.</td></tr>
-            </tbody>
-          </table>
-        </div>
+      <div class="table-wrap">
+        <table class="glossary-table">
+          <colgroup>
+            <col style="width:32ch;">
+            <col>
+          </colgroup>
+          <caption class="visually-hidden">MYP terminology glossary</caption>
+          <thead><tr><th>Term</th><th>Definition</th></tr></thead>
+          <tbody>
+            <tr><td class="term">Approaches to Learning (ATL)</td><td class="def">The five skill categories (communication, social, self-management, research, thinking) that help students "learn how to learn."</td></tr>
+            <tr><td class="term">Best-fit</td><td class="def">Judging work against the descriptor it matches <em>overall</em>, rather than checking off every word.</td></tr>
+            <tr><td class="term">Command terms</td><td class="def">Defined instruction words (analyse, evaluate, justify&hellip;) that specify what a task requires.</td></tr>
+            <tr><td class="term">Community Project</td><td class="def">A student-directed, service-focused project, usually in Years 3 or 4, often done in groups.</td></tr>
+            <tr><td class="term">Conceptual understanding</td><td class="def">Grasp of a transferable big idea that can move across topics and subjects.</td></tr>
+            <tr><td class="term">Criterion-related assessment</td><td class="def">Judging work against published standards, not against other students.</td></tr>
+            <tr><td class="term">eAssessment</td><td class="def">The IB's optional external assessment (on-screen exams + ePortfolios) leading to an IB-validated MYP Certificate.</td></tr>
+            <tr><td class="term">Global context</td><td class="def">One of six real-world settings that give a unit relevance and purpose.</td></tr>
+            <tr><td class="term">Interdisciplinary learning</td><td class="def">Integrating two+ subject groups to build new, combined understanding (&ge;1 unit per year).</td></tr>
+            <tr><td class="term">International-mindedness</td><td class="def">The disposition to understand and respect other cultures and perspectives.</td></tr>
+            <tr><td class="term">Key concept</td><td class="def">One of 16 broad, interdisciplinary big ideas shared across the programme.</td></tr>
+            <tr><td class="term">Learner Profile</td><td class="def">The IB's ten attributes describing the kind of learner all programmes aim to develop.</td></tr>
+            <tr><td class="term">Moderation</td><td class="def">The IB's check of sampled work to keep grades comparable across schools.</td></tr>
+            <tr><td class="term">MYP coordinator</td><td class="def">The person who leads MYP implementation and is your go-to for guidance.</td></tr>
+            <tr><td class="term">Personal Project</td><td class="def">The required, independent, self-directed culminating project in the final year (MYP 5).</td></tr>
+            <tr><td class="term">Related concept</td><td class="def">A subject-specific concept that deepens a key concept within one discipline.</td></tr>
+            <tr><td class="term">Service as Action</td><td class="def">The MYP's approach to meaningful action and service arising from learning.</td></tr>
+            <tr><td class="term">Standardization</td><td class="def">Teachers aligning their judgements within a school so marking is consistent.</td></tr>
+            <tr><td class="term">Statement of inquiry</td><td class="def">The single sentence that expresses a unit's core transferable understanding (concept + context).</td></tr>
+            <tr><td class="term">Subject groups</td><td class="def">The eight required areas of MYP study.</td></tr>
+            <tr><td class="term">Unit planner</td><td class="def">The shared document that captures the design of an MYP unit.</td></tr>
+          </tbody>
+        </table>
       </div>
     </section>
 
@@ -1288,6 +1295,53 @@ footer .small{color:#a89c84;}
 
   window.addEventListener('scroll', function(){ updateProgress(); updateToTop(); }, {passive:true});
   updateProgress(); updateToTop();
+
+  /* Desktop TOC auto-fit: shrink only as far as needed so it never scrolls */
+  var tocEl = document.getElementById('toc');
+  var TOC_BASE = { font:.86, h2Font:.68, h2Margin:12, padV:6, padH:10, lineHeight:1.3, numFont:.66 };
+  var TOC_MIN_SCALE = .72 / .86; /* floor: ~0.72rem body font */
+  var tocDesktopMQ = window.matchMedia('(min-width:981px)');
+
+  function applyTocScale(scale){
+    tocEl.style.setProperty('--toc-font', (TOC_BASE.font * scale).toFixed(3) + 'rem');
+    tocEl.style.setProperty('--toc-h2-font', (TOC_BASE.h2Font * scale).toFixed(3) + 'rem');
+    tocEl.style.setProperty('--toc-h2-margin', (TOC_BASE.h2Margin * scale).toFixed(2) + 'px');
+    tocEl.style.setProperty('--toc-pad-v', (TOC_BASE.padV * scale).toFixed(2) + 'px');
+    tocEl.style.setProperty('--toc-pad-h', (TOC_BASE.padH * scale).toFixed(2) + 'px');
+    tocEl.style.setProperty('--toc-line-height', TOC_BASE.lineHeight.toString());
+    tocEl.style.setProperty('--toc-num-font', (TOC_BASE.numFont * scale).toFixed(3) + 'rem');
+  }
+
+  function clearTocScale(){
+    ['--toc-font','--toc-h2-font','--toc-h2-margin','--toc-pad-v','--toc-pad-h','--toc-line-height','--toc-num-font']
+      .forEach(function(prop){ tocEl.style.removeProperty(prop); });
+  }
+
+  function fitToc(){
+    if(!tocEl) return;
+    if(!tocDesktopMQ.matches){ clearTocScale(); return; }
+
+    var topOffset = parseFloat(getComputedStyle(tocEl).top) || 76;
+    var available = window.innerHeight - topOffset - 16; /* 16px breathing room at bottom */
+
+    var scale = 1;
+    applyTocScale(scale);
+    var guard = 0;
+    while(tocEl.scrollHeight > available && scale > TOC_MIN_SCALE && guard < 40){
+      scale = Math.max(TOC_MIN_SCALE, scale - 0.02);
+      applyTocScale(scale);
+      guard++;
+    }
+  }
+
+  if(tocEl){
+    fitToc();
+    var tocResizeTimer;
+    window.addEventListener('resize', function(){
+      clearTimeout(tocResizeTimer);
+      tocResizeTimer = setTimeout(fitToc, 120);
+    }, {passive:true});
+  }
 
   /* TOC active-section highlighting */
   var tocLinks = Array.prototype.slice.call(document.querySelectorAll('nav.toc a'));
