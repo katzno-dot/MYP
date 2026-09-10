@@ -285,6 +285,55 @@ li{margin:.3em 0;}
 .card.accent-orange{border-top:4px solid var(--orange);}
 .card.accent-olive{border-top:4px solid var(--olive);}
 
+/* ---------- Guide link cards (clickable PDF cards) ---------- */
+.guide-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:20px 0;}
+@media(max-width:820px){.guide-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:560px){.guide-grid{grid-template-columns:1fr;}}
+.guide-card{
+  display:block;text-decoration:none;color:var(--ink);
+  background:var(--surface-raised);border:1px solid var(--line);border-radius:var(--radius);
+  padding:18px 20px;box-shadow:var(--shadow-sm);
+  transition:transform .22s cubic-bezier(.2,.7,.3,1), box-shadow .22s ease, border-color .22s ease, background .22s ease;
+  position:relative;overflow:hidden;
+}
+.guide-card::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(120deg,transparent 40%,rgba(255,255,255,.35) 50%,transparent 60%);
+  transform:translateX(-120%);transition:transform .55s ease;
+  pointer-events:none;
+}
+.guide-card:hover::after{transform:translateX(120%);}
+.guide-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 14px 30px -14px rgba(44,39,35,.45);
+  border-color:var(--ink-soft);
+}
+.guide-card:active{transform:translateY(-1px) scale(.99);}
+.guide-card:focus-visible{outline:3px solid var(--teal);outline-offset:2px;}
+.guide-card .g-eyebrow{
+  font-family:var(--font-display);text-transform:uppercase;letter-spacing:.1em;
+  font-size:.64rem;font-weight:700;color:var(--ink-soft);display:block;margin-bottom:6px;
+}
+.guide-card h4{margin:.1em 0 .5em;font-size:1rem;line-height:1.25;color:var(--ink);}
+.guide-card .g-open{
+  font-family:var(--font-display);text-transform:uppercase;letter-spacing:.08em;
+  font-size:.68rem;font-weight:700;display:inline-flex;align-items:center;gap:6px;
+}
+.guide-card .g-open .g-arrow{display:inline-block;transition:transform .22s ease;}
+.guide-card:hover .g-open .g-arrow{transform:translateX(4px);}
+.guide-card.accent-teal{border-top:4px solid var(--teal);}
+.guide-card.accent-teal .g-open{color:var(--teal-deep);}
+.guide-card.accent-mustard{border-top:4px solid var(--mustard);}
+.guide-card.accent-mustard .g-open{color:var(--mustard-deep);}
+.guide-card.accent-orange{border-top:4px solid var(--orange);}
+.guide-card.accent-orange .g-open{color:var(--orange-deep);}
+.guide-card.accent-olive{border-top:4px solid var(--olive);}
+.guide-card.accent-olive .g-open{color:var(--olive-deep);}
+.guide-card.accent-final{
+  border-top:4px solid var(--ink);background:var(--teal-tint);
+}
+.guide-card.accent-final .g-open{color:var(--teal-deep);}
+
 /* numbered chip */
 .chip{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;
   background:var(--ink);color:var(--paper);font-family:var(--font-display);font-weight:700;
@@ -505,6 +554,7 @@ footer .small{color:#a89c84;}
       <li><a href="#s18">Terminology glossary</a></li>
       <li><a href="#s19">MYP 2028 &amp; what's coming</a></li>
       <li><a href="#s20">What to focus on first</a></li>
+      <li><a href="#s21">MYP subject guides (PDF)</a></li>
     </ol>
   </nav>
 
@@ -1110,6 +1160,61 @@ footer .small{color:#a89c84;}
       <div class="callout big-idea">
         <div class="label"><span class="ic">★</span> Big Idea to leave with</div>
         <p>You already know how to teach. The MYP gives you a shared, thoughtful structure for <em>why</em> and <em>how</em> &mdash; concepts, contexts, skills, and inquiry &mdash; that turns good lessons into connected, meaningful learning. Start small, lean on your team, and let understanding build unit by unit.</p>
+      </div>
+    </section>
+
+    <!-- 21 -->
+    <section class="section" id="s21">
+      <div class="kicker"><span class="num">21</span> Reference documents</div>
+      <h2>MYP subject guides</h2>
+      <p class="lead">Official IB subject guides for reference &mdash; click any box to open the PDF.</p>
+
+      <div class="guide-grid">
+        <a class="guide-card accent-teal" href="https://drive.google.com/file/d/1pG5mAqSX3nkOS-h_qa1iWr9KcxrngnjF/view?usp=drive_link" target="_blank" rel="noopener noreferrer">
+          <span class="g-eyebrow">Group I</span>
+          <h4>Language and Literature MYP</h4>
+          <span class="g-open">Open PDF <span class="g-arrow">&rarr;</span></span>
+        </a>
+        <a class="guide-card accent-mustard" href="https://drive.google.com/file/d/1yObdD29u3PimNUqa8g_3SPUNmUjYAvw5/view?usp=drive_link" target="_blank" rel="noopener noreferrer">
+          <span class="g-eyebrow">Group II</span>
+          <h4>Language Acquisition MYP</h4>
+          <span class="g-open">Open PDF <span class="g-arrow">&rarr;</span></span>
+        </a>
+        <a class="guide-card accent-orange" href="https://drive.google.com/file/d/1W8BKNVDT0EDtWmQp-PbK1XpK9AzVKfFT/view?usp=drive_link" target="_blank" rel="noopener noreferrer">
+          <span class="g-eyebrow">Group III</span>
+          <h4>Individuals &amp; Societies MYP</h4>
+          <span class="g-open">Open PDF <span class="g-arrow">&rarr;</span></span>
+        </a>
+        <a class="guide-card accent-olive" href="https://drive.google.com/file/d/1MEhgFZ8UVx9IrWfTVOmcdbSgqPKv1WXR/view?usp=drive_link" target="_blank" rel="noopener noreferrer">
+          <span class="g-eyebrow">Group IV</span>
+          <h4>Sciences MYP</h4>
+          <span class="g-open">Open PDF <span class="g-arrow">&rarr;</span></span>
+        </a>
+        <a class="guide-card accent-teal" href="https://drive.google.com/file/d/1GrWyP2cfauwnlDY9Qr-Y32MWtWA8e5qB/view?usp=drive_link" target="_blank" rel="noopener noreferrer">
+          <span class="g-eyebrow">Group V</span>
+          <h4>Math MYP</h4>
+          <span class="g-open">Open PDF <span class="g-arrow">&rarr;</span></span>
+        </a>
+        <a class="guide-card accent-mustard" href="https://drive.google.com/file/d/1F_A9UJXutdDiG8DdkXKf1pJG425fTB9d/view?usp=drive_link" target="_blank" rel="noopener noreferrer">
+          <span class="g-eyebrow">Group VI</span>
+          <h4>Arts MYP</h4>
+          <span class="g-open">Open PDF <span class="g-arrow">&rarr;</span></span>
+        </a>
+        <a class="guide-card accent-orange" href="https://drive.google.com/file/d/1h368i0lOLGNXBQWlW9npfJOdBRXNj-su/view?usp=drive_link" target="_blank" rel="noopener noreferrer">
+          <span class="g-eyebrow">Group VII</span>
+          <h4>Physical &amp; Health Education MYP</h4>
+          <span class="g-open">Open PDF <span class="g-arrow">&rarr;</span></span>
+        </a>
+        <a class="guide-card accent-olive" href="https://drive.google.com/file/d/1s4h4_SWK0whya-K8OZXkqiba9GbgNjZC/view?usp=drive_link" target="_blank" rel="noopener noreferrer">
+          <span class="g-eyebrow">Group VIII</span>
+          <h4>Design MYP</h4>
+          <span class="g-open">Open PDF <span class="g-arrow">&rarr;</span></span>
+        </a>
+        <a class="guide-card accent-final" href="https://drive.google.com/file/d/1LxnmFXgrbEaelzDpeWEguItvOVFIBMaG/view?usp=drive_link" target="_blank" rel="noopener noreferrer">
+          <span class="g-eyebrow">Culminating project</span>
+          <h4>Personal Project MYP</h4>
+          <span class="g-open">Open PDF <span class="g-arrow">&rarr;</span></span>
+        </a>
       </div>
     </section>
 
